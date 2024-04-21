@@ -1,27 +1,21 @@
 ﻿using FooDrink.Database.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FooDrink.Database
 {
     public class FooDrinkDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<User>? Users { get; set; }
 
-        public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Restaurant>? Restaurants { get; set; }
 
-        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Menu>? Menus { get; set; }
 
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Order>? Orders { get; set; }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product>? Products { get; set; }
 
-        public DbSet<Review>  Reviews { get; set; }
+        public DbSet<Review>? Reviews { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,7 +23,7 @@ namespace FooDrink.Database
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {          
+        {
         }
     }
 }

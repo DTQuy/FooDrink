@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FooDrink.Database.Models
+﻿namespace FooDrink.Database.Models
 {
-    public class Review :BaseEntity
+    public class Review : BaseEntity
     {
         public Guid UserId { get; set; }
 

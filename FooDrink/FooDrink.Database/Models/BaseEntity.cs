@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FooDrink.Database.Models
+﻿namespace FooDrink.Database.Models
 {
     public class BaseEntity
     {
@@ -13,6 +7,6 @@ namespace FooDrink.Database.Models
         public string CreatedBy { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public string? UpdatedBy { get; set; }
-        public DateTime UpdatedAt { get; set;}
+        public DateTime UpdatedAt { get; set; }
     }
 }
