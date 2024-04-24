@@ -20,7 +20,7 @@ namespace FooDrink.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            _ = optionsBuilder.UseSqlServer("Server=.\\MSSQLSERVER2017;Database=FooDrink;User Id=dangthanhquy_FooDrink;Password=Thanhquy12345@");
+            _ = optionsBuilder.UseSqlServer("Server=125.212.218.93\\MSSQLSERVER2017;Database=FooDrink;User Id=dangthanhquy_FooDrink;Password=Thanhquy12345@");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
