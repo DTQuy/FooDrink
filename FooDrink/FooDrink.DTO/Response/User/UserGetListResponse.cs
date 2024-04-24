@@ -1,6 +1,6 @@
 ﻿namespace FooDrink.DTO.Response.User
 {
-    internal class Class1
+    public class UserGetListResponse
     {
     }
 }

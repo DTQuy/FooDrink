@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FooDrink.Database\FooDrink.Database.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -18,9 +18,8 @@ namespace FooDrink.Database
 
         public DbSet<Review>? Reviews { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public FooDrinkDbContext(DbContextOptions<FooDrinkDbContext> options) : base(options)
         {
-            _ = optionsBuilder.UseSqlServer("Server=125.212.218.93\\MSSQLSERVER2017;Database=FooDrink;User Id=dangthanhquy_FooDrink;Password=Thanhquy12345@");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FooDrink.DTO.Request.User
 {
-    internal class Class1
+    public class UserGetListRequest
     {
     }
 }
