@@ -8,5 +8,6 @@
         public string CategoryList { get; set; } = string.Empty;
         public string ImageList { get; set; } = string.Empty;
         public Guid MenuId { get; set; }
+        public Menu? Menu { get; set; }
     }
 }

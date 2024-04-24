@@ -11,5 +11,7 @@
         public string Content { get; set; } = string.Empty;
 
         public int Rating { get; set; }
+        public User? User { get; set; }
+        public Restaurant? Restaurant { get; set; }
     }
 }

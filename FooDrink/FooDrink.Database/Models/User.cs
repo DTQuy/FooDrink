@@ -12,5 +12,7 @@
         public string Role { get; set; } = string.Empty;
         public string Image { get; set; } = string.Empty;
         public Guid RestaurantId { get; set; }
+        public ICollection<Restaurant>? Restaurants { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FooDrink.Database.Models;
+﻿using FooDrink.Database.Configuration;
+using FooDrink.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FooDrink.Database
@@ -24,6 +25,13 @@ namespace FooDrink.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            _ = modelBuilder.ApplyConfiguration(new MenuConfig());
+            _ = modelBuilder.ApplyConfiguration(new OrderConfig());
+            _ = modelBuilder.ApplyConfiguration(new ProductConfig());
+            _ = modelBuilder.ApplyConfiguration(new RestaurantConfig());
+            _ = modelBuilder.ApplyConfiguration(new ReviewConfig());
+            _ = modelBuilder.ApplyConfiguration(new UserConfig());
         }
     }
 }
