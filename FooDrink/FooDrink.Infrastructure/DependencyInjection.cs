@@ -1,6 +1,5 @@
 ﻿using FooDrink.Database;
 using FooDrink.Repository.Interface;
-using FooDrink.Repository.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,8 +12,9 @@ namespace FooDrink.Infrastructure
         public static void ConfigureServiceManager(this IServiceCollection services)
         {
 
-            services.AddHttpContextAccessor();
-            services.AddScoped<IUserRepository, UserRepository>();
+            _ = services.AddHttpContextAccessor();
+            _ = services.AddScoped<IUserRepository>();
+            _ = services.AddScoped<IUnitOfWork>();
 
         }
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
