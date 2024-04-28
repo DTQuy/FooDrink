@@ -1,14 +1,17 @@
 ﻿using FooDrink.DTO.Request;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FooDrink.Repository.Interface
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T GetById(Guid id);
-        T Add(T entity);
-        bool Edit(T entity);
-        bool DeleteById(Guid id);
+        Task<T?> GetByIdAsync(Guid id);
+        Task<IEnumerable<T>> GetAll();
+        Task<T> AddAsync(T entity);
+        Task<bool> EditAsync(T entity);
+        Task<bool> DeleteByIdAsync(Guid id);
         IEnumerable<T> GetWithPaging(IPagingRequest pagingRequest);
     }
 }

@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FooDrink.BussinessService\FooDrink.BussinessService.csproj" />
     <ProjectReference Include="..\FooDrink.Database\FooDrink.Database.csproj" />
     <ProjectReference Include="..\FooDrink.Repository\FooDrink.Repository.csproj" />
   </ItemGroup>

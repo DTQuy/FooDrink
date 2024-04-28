@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FooDrink.Database\FooDrink.Database.csproj" />
+    <ProjectReference Include="..\FooDrink.BussinessService\FooDrink.BussinessService.csproj" />
     <ProjectReference Include="..\FooDrink.Infrastructure\FooDrink.Infrastructure.csproj" />
   </ItemGroup>
 

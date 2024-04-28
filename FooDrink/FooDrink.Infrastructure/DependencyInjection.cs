@@ -1,9 +1,10 @@
-﻿using FooDrink.Database;
+﻿using FooDrink.BussinessService.Service;
+using FooDrink.Database;
+using FooDrink.Repository;
 using FooDrink.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 
 namespace FooDrink.Infrastructure
 {
@@ -11,12 +12,13 @@ namespace FooDrink.Infrastructure
     {
         public static void ConfigureServiceManager(this IServiceCollection services)
         {
-
             _ = services.AddHttpContextAccessor();
-            _ = services.AddScoped<IUserRepository>();
-            _ = services.AddScoped<IUnitOfWork>();
-
+            _ = services.AddScoped<IUserRepository, UserService>();
+            _ = services.AddScoped<IUnitOfWork, UnitOfWork>();
+            _ = services.AddScoped<IProductRepository, ProductService>();
         }
+
+
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
         {
             if (configuration == null)
@@ -26,8 +28,13 @@ namespace FooDrink.Infrastructure
 
             string connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            _ = services.AddDbContext<FooDrinkDbContext>(opts =>
-                opts.UseSqlServer(connectionString));
+            services.AddDbContext<FooDrinkDbContext>(opts =>
+                opts.UseSqlServer(connectionString), ServiceLifetime.Transient); 
+            
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+            using var scope = serviceProvider.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<FooDrinkDbContext>();
+            dbContext.Database.Migrate();
         }
     }
 }

@@ -4,8 +4,8 @@ using FooDrink.DTO.Response.Product;
 
 namespace FooDrink.Repository.Interface
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IProductRepository : IUnitOfWork
     {
-        Task<ProductGetListResponse> GetApplicationProductList(ProductGetListRequest request);
+        
     }
 }

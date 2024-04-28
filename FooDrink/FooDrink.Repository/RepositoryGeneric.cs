@@ -1,4 +1,8 @@
-﻿using FooDrink.Database;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FooDrink.Database;
 using FooDrink.DTO.Request;
 using FooDrink.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -11,67 +15,71 @@ namespace FooDrink.Repository
 
         public RepositoryGeneric(DbContextOptions<FooDrinkDbContext> contextOptions)
         {
-            _contextOptions = contextOptions;
+            _contextOptions = contextOptions ?? throw new ArgumentNullException(nameof(contextOptions));
         }
 
-        public T Add(T entity)
+        public async Task<T> AddAsync(T entity)
         {
-            using FooDrinkDbContext context = new(_contextOptions);
-            _ = context.Set<T>().Add(entity);
-            _ = context.SaveChanges();
+            using (var context = new FooDrinkDbContext(_contextOptions))
+            {
+                await context.Set<T>().AddAsync(entity);
+                await context.SaveChangesAsync();
+            }
             return entity;
         }
 
-        public bool DeleteById(Guid id)
+        public async Task<bool> DeleteByIdAsync(Guid id)
         {
-            using FooDrinkDbContext context = new(_contextOptions);
-            T? entity = context.Set<T>().Find(id);
+            using var context = new FooDrinkDbContext(_contextOptions);
+            var entity = await context.Set<T>().FindAsync(id);
             if (entity != null)
             {
-                _ = context.Set<T>().Remove(entity);
-                _ = context.SaveChanges();
+                context.Set<T>().Remove(entity);
+                await context.SaveChangesAsync();
                 return true;
             }
             return false;
         }
 
-        public bool Edit(T entity)
+        public async Task<bool> EditAsync(T entity)
         {
-            using FooDrinkDbContext context = new(_contextOptions);
+            using var context = new FooDrinkDbContext(_contextOptions);
             context.Entry(entity).State = EntityState.Modified;
-            _ = context.SaveChanges();
+            await context.SaveChangesAsync();
             return true;
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            using FooDrinkDbContext context = new(_contextOptions);
-            return context.Set<T>().ToList();
+            using var context = new FooDrinkDbContext(_contextOptions);
+            return await context.Set<T>().ToListAsync();
         }
 
-        public T GetById(Guid id)
+        public async Task<T?> GetByIdAsync(Guid id)
         {
-            try
+            using var context = new FooDrinkDbContext(_contextOptions);
+            var entity = await context.Set<T>().FindAsync(id);
+            if (entity == null)
             {
-                using FooDrinkDbContext context = new(_contextOptions);
-                T entity = context.Set<T>().Find(id)!;
-                if (entity == null)
-                {
-                    Console.WriteLine($"Entity with ID {id} not found.");
-                    return default!;
-                }
-                return entity;
+                Console.WriteLine($"Entity with ID {id} not found.");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error occurred while getting entity with ID {id}: {ex.Message}");
-                return default!;
-            }
+            return entity;
         }
 
         public IEnumerable<T> GetWithPaging(IPagingRequest pagingRequest)
         {
-            throw new NotImplementedException();
+            if (pagingRequest == null)
+            {
+                throw new ArgumentNullException(nameof(pagingRequest));
+            }
+
+            using var context = new FooDrinkDbContext(_contextOptions);
+            var query = context.Set<T>().AsQueryable();
+
+            query = query.Skip(pagingRequest.PageSize * (pagingRequest.PageIndex - 1))
+                         .Take(pagingRequest.PageSize);
+
+            return query.ToList();
         }
     }
 }

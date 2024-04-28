@@ -13,7 +13,6 @@
         public int PageIndex { get; set; } = 1;
 
         public string SearchString { get; set; } = string.Empty;
-        public string OrderBy { get; set; } = string.Empty;
 
     }
 }

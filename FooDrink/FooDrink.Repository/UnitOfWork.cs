@@ -1,16 +1,22 @@
-﻿using FooDrink.Database.Models;
+﻿using FooDrink.Database;
+using FooDrink.Database.Models;
 using FooDrink.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace FooDrink.Repository
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly IRepository<Product> _productRepo;
+        private readonly DbContextOptions<FooDrinkDbContext> _contextOptions;
 
-        public UnitOfWork(IRepository<Product> productRepo)
+        public UnitOfWork(DbContextOptions<FooDrinkDbContext> contextOptions)
         {
-            _productRepo = productRepo ?? throw new ArgumentNullException(nameof(productRepo));
+            _contextOptions = contextOptions;
+            ProductRepository = new RepositoryGeneric<Product>(_contextOptions);
+            UserRepository = new RepositoryGeneric<User>(_contextOptions);
         }
-    }
 
+        public IRepository<Product> ProductRepository { get; }
+        public IRepository<User> UserRepository { get; }
+    }
 }

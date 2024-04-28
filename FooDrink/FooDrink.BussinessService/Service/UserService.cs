@@ -1,52 +1,54 @@
-﻿using FooDrink.Database;
-using FooDrink.Database.Models;
-using FooDrink.DTO.Request;
+﻿using FooDrink.Database.Models;
 using FooDrink.DTO.Request.User;
 using FooDrink.DTO.Response.User;
 using FooDrink.Repository.Interface;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FooDrink.BussinessService.Service
 {
-    public class UserService : IUserRepository, IRepository<User>
+    public class UserService : IUserRepository
     {
-        public readonly DbContextOptions<FooDrinkDbContext> dbContextOptions;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(DbContextOptions<FooDrinkDbContext> dbContextOptions)
+        public IRepository<Product> ProductRepository => throw new NotImplementedException();
+
+        public IRepository<User> UserRepository => throw new NotImplementedException();
+
+      
+
+        public async Task<User> AddUser(User user)
         {
-            this.dbContextOptions = dbContextOptions;
+            // Add user to the repository
+            return await _unitOfWork.UserRepository.AddAsync(user);
         }
 
-        public User Add(User entity)
+        public async Task<bool> DeleteUser(Guid userId)
         {
-            throw new NotImplementedException();
+            // Delete user from the repository
+            return await _unitOfWork.UserRepository.DeleteByIdAsync(userId);
         }
 
-        public bool DeleteById(Guid id)
+        public async Task<bool> UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            // Update user in the repository
+            return await _unitOfWork.UserRepository.EditAsync(user);
         }
 
-        public bool Edit(User entity)
+        public async Task<IEnumerable<User>> GetAllUsers(UserGetListRequest request)
         {
-            throw new NotImplementedException();
+            // Get all users from the repository
+            return await _unitOfWork.UserRepository.GetAll();
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<User> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            // Get user by ID from the repository
+            return await _unitOfWork.UserRepository.GetByIdAsync(id);
         }
 
-        public Task<UserGetListResponse> GetApplicationUserList(UserGetListRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<User> GetWithPaging(IPagingRequest pagingRequest)
+        public Task<UserGetListResponse> GetApplicationUserListAsync(UserGetListRequest request)
         {
             throw new NotImplementedException();
         }

@@ -17,9 +17,5 @@
         /// </summary>
         public string SearchString { get; set; }
 
-        /// <summary>
-        /// Order by
-        /// </summary>
-        public string OrderBy { get; set; }
     }
 }
