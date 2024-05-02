@@ -4,7 +4,7 @@ using FooDrink.DTO.Response.User;
 
 namespace FooDrink.Repository.Interface
 {
-    public interface IUserRepository : IUnitOfWork
+    public interface IUserRepository : IRepository<User>
     {
         Task<UserGetListResponse> GetApplicationUserListAsync(UserGetListRequest request);
     }

@@ -4,7 +4,7 @@ using FooDrink.DTO.Response.Product;
 
 namespace FooDrink.Repository.Interface
 {
-    public interface IProductRepository : IUnitOfWork
+    public interface IProductRepository : IRepository<Product>
     {
         
     }
