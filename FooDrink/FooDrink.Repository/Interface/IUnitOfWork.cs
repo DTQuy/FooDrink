@@ -7,6 +7,7 @@ namespace FooDrink.Repository.Interface
         public IRepository<Product> ProductRepository { get; }
 
         public IRepository<User> UserRepository { get; }
+        public void SaveChangeData();
     }
 }
 
