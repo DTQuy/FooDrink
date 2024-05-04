@@ -1,5 +1,6 @@
 ﻿using FooDrink.BussinessService.Service;
 using FooDrink.Database;
+using FooDrink.Infrastructure.Authentication;
 using FooDrink.Repository;
 using FooDrink.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,9 @@ namespace FooDrink.Infrastructure
             _ = services.AddHttpContextAccessor();
             _ = services.AddScoped<IUserRepository, UserService>();
             _ = services.AddScoped<IUnitOfWork, UnitOfWork>();
-            _ = services.AddScoped<IProductRepository, ProductService>();
+            _ = services.AddScoped<IProductRepository, IProductService>();
+            _ = services.AddScoped<IAuthenticationRepository, AuthenticationService>();
+            _ = services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         }
 
 

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FooDrink.Infrastructure.Authentication
+namespace FooDrink.Repository.Interface
 {
-    internal class Class1
+    public interface IJwtTokenGenerator
     {
+        string GenerateToken(Guid id, string fullName);
     }
 }

@@ -14,9 +14,11 @@ namespace FooDrink.Repository
             _contextOptions = contextOptions;
             ProductRepository = new RepositoryGeneric<Product>(_contextOptions);
             UserRepository = new RepositoryGeneric<User>(_contextOptions);
+            AuthenticationRepository = new AuthenticationRepository(_contextOptions);
         }
 
         public IRepository<Product> ProductRepository { get; }
         public IRepository<User> UserRepository { get; }
+        public AuthenticationRepository AuthenticationRepository { get; }
     }
 }
