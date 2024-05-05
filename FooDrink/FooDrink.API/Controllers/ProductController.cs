@@ -1,5 +1,6 @@
 ﻿using FooDrink.BussinessService.Service;
 using FooDrink.DTO.Request.Product;
+using FooDrink.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FooDrink.API.Controllers
@@ -8,14 +9,14 @@ namespace FooDrink.API.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductService _productService;
+        private readonly IProductRepository _productService;
 
-        public ProductController(ProductService productService)
+        public ProductController(IProductRepository productService)
         {
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
-        [HttpGet("GetListProduct")]
+        /*[HttpGet("GetListProduct")]
         public IActionResult GetListProduct([FromQuery] ProductGetListRequest request)
         {
             try
@@ -27,6 +28,6 @@ namespace FooDrink.API.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
-        }
+        }*/
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FooDrink.Database.Models;
 using FooDrink.DTO.Request.User;
 using FooDrink.DTO.Response.User;
+using FooDrink.Repository;
 using FooDrink.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace FooDrink.BussinessService.Service
 
         public IRepository<User> UserRepository => throw new NotImplementedException();
 
-      
+        public AuthenticationRepository AuthenticationRepository => throw new NotImplementedException();
 
         public async Task<User> AddUser(User user)
         {
