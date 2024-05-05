@@ -1,4 +1,5 @@
-﻿using FooDrink.BussinessService.Service;
+﻿using FooDrink.BussinessService.Interface;
+using FooDrink.BussinessService.Service;
 using FooDrink.Database;
 using FooDrink.Infrastructure.Authentication;
 using FooDrink.Repository;
@@ -15,12 +16,11 @@ namespace FooDrink.Infrastructure
         {
             _ = services.AddHttpContextAccessor();
             _ = services.AddScoped<IUserRepository, UserService>();
-            _ = services.AddScoped<IUnitOfWork, UnitOfWork>();
-            _ = services.AddScoped<IProductRepository, IProductService>();
-            _ = services.AddScoped<IAuthenticationRepository, AuthenticationService>();
+            _ = services.AddScoped<IProductRepository, ProductService>();
+            _ = services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            _ = services.AddScoped<IAuthenticationService, AuthenticationService>();
             _ = services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         }
-
 
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
         {

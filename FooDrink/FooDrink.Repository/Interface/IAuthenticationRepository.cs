@@ -1,4 +1,5 @@
-﻿using FooDrink.DTO.Request.Authentication;
+﻿using FooDrink.Database.Models;
+using FooDrink.DTO.Request.Authentication;
 using FooDrink.DTO.Response.Authentication;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ namespace FooDrink.Repository.Interface
 {
     public interface IAuthenticationRepository : IUnitOfWork
     {
-        Task<AuthenticationResponse> Login(LoginRequest request);
-        Task<AuthenticationResponse> Register(RegisterRequest request);
+        Task<User?> GetByUsernameAndPassword(string username, string password);
+        Task<User?> GetByUsername(string username);
+        Task<User> AddAsync(User entity);
     }
 }

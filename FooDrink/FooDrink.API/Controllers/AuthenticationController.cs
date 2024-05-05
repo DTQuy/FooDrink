@@ -1,4 +1,5 @@
-﻿using FooDrink.BussinessService.Service;
+﻿using FooDrink.BussinessService.Interface;
+using FooDrink.BussinessService.Service;
 using FooDrink.DTO.Request.Authentication;
 using FooDrink.DTO.Response.Authentication;
 using FooDrink.Repository.Interface;
@@ -11,8 +12,8 @@ namespace FooDrink.API.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IAuthenticationRepository _authenticationService;
-        public AuthenticationController(IAuthenticationRepository authenticationService) 
+        private readonly IAuthenticationService _authenticationService;
+        public AuthenticationController(IAuthenticationService authenticationService) 
         {
             _authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }

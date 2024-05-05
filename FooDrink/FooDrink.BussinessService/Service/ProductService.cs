@@ -8,11 +8,11 @@ using System.Collections.Generic;
 
 namespace FooDrink.BussinessService.Service
 {
-    public class IProductService : IProductRepository
+    public class ProductService : IProductRepository
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public IProductService(IUnitOfWork unit)
+        public ProductService(IUnitOfWork unit)
         {
             _unitOfWork = unit;
         }

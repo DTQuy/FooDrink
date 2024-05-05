@@ -10,9 +10,15 @@ using System.Threading.Tasks;
 
 namespace FooDrink.Repository
 {
-    public class AuthenticationRepository
+    public class AuthenticationRepository : IAuthenticationRepository
     {
         private readonly DbContextOptions<FooDrinkDbContext> _contextOptions;
+
+        public IRepository<Product>? ProductRepository => throw new NotImplementedException();
+
+        public IRepository<User>? UserRepository => throw new NotImplementedException();
+
+        AuthenticationRepository IUnitOfWork.AuthenticationRepository => throw new NotImplementedException();
 
         public AuthenticationRepository(DbContextOptions<FooDrinkDbContext> contextOptions)
         {

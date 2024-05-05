@@ -1,4 +1,5 @@
-﻿using FooDrink.Database.Models;
+﻿using FooDrink.BussinessService.Interface;
+using FooDrink.Database.Models;
 using FooDrink.DTO.Request.Authentication;
 using FooDrink.DTO.Response.Authentication;
 using FooDrink.Repository;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FooDrink.BussinessService.Service
 {
-    public class AuthenticationService : IAuthenticationRepository
+    public class AuthenticationService : IAuthenticationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
@@ -27,8 +28,6 @@ namespace FooDrink.BussinessService.Service
         public IRepository<User>? UserRepository => throw new NotImplementedException();
 
         public IRepository<User>? AuthenticationRepository => throw new NotImplementedException();
-
-        AuthenticationRepository IUnitOfWork.AuthenticationRepository => throw new NotImplementedException();
 
         public async Task<AuthenticationResponse> Login(LoginRequest request)
         {
