@@ -14,12 +14,11 @@ namespace FooDrink.BussinessService.Service
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-
-        public AuthenticationService(IUnitOfWork unit, IJwtTokenGenerator jwtTokenGenerator)
+        private readonly IAuthenticationRepository _authenticationRepository;
+        public AuthenticationService(IAuthenticationRepository authenticationRepository, IJwtTokenGenerator jwtTokenGenerator)
         {
-            _unitOfWork = unit;
+            _authenticationRepository = authenticationRepository;
             _jwtTokenGenerator = jwtTokenGenerator;
         }
 
@@ -33,7 +32,7 @@ namespace FooDrink.BussinessService.Service
         {
             var response = new AuthenticationResponse();
 
-            var user = await _unitOfWork.AuthenticationRepository.GetByUsernameAndPassword(request.Username, request.Password);
+            var user = await _authenticationRepository.GetByUsernameAndPassword(request.Username, request.Password);
 
             if (user != null)
             {
@@ -51,7 +50,7 @@ namespace FooDrink.BussinessService.Service
         {
             var response = new AuthenticationResponse();
 
-            var user = await _unitOfWork.AuthenticationRepository.GetByUsername(request.Username);
+            var user = await _authenticationRepository.GetByUsername(request.Username);
 
             if (user == null)
             {
@@ -64,7 +63,7 @@ namespace FooDrink.BussinessService.Service
                     Role = "Customer",
                     Status = true
                 };
-                _ = await _unitOfWork.AuthenticationRepository.AddAsync(newUser);
+                _ = await _authenticationRepository.AddAsync(newUser);
                 response.Token = _jwtTokenGenerator.GenerateToken(newUser.Id, newUser.Role);
             }
             else

@@ -15,8 +15,6 @@ namespace FooDrink.Infrastructure
         public static void ConfigureServiceManager(this IServiceCollection services)
         {
             _ = services.AddHttpContextAccessor();
-            _ = services.AddScoped<IUserRepository, UserService>();
-            _ = services.AddScoped<IProductRepository, ProductService>();
             _ = services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             _ = services.AddScoped<IAuthenticationService, AuthenticationService>();
             _ = services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
@@ -37,7 +35,7 @@ namespace FooDrink.Infrastructure
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             using var scope = serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<FooDrinkDbContext>();
-            dbContext.Database.Migrate();
-        }
+/*            dbContext.Database.Migrate();
+*/        }
     }
 }

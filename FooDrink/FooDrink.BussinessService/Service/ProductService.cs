@@ -1,4 +1,5 @@
-﻿using FooDrink.Database.Models;
+﻿using FooDrink.BussinessService.Interface;
+using FooDrink.Database.Models;
 using FooDrink.DTO.Request;
 using FooDrink.DTO.Request.Product;
 using FooDrink.DTO.Response.Product;
@@ -8,26 +9,16 @@ using System.Collections.Generic;
 
 namespace FooDrink.BussinessService.Service
 {
-    public class ProductService : IProductRepository
+    public class ProductService : IProductService
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public ProductService(IUnitOfWork unit)
+        private readonly IProductRepository _repository;
+        public ProductService(IProductRepository repository)
         {
-            _unitOfWork = unit;
+            _repository = repository;
         }
-
-        public IRepository<Product> ProductRepository => throw new NotImplementedException();
-
-        public IRepository<User> UserRepository => throw new NotImplementedException();
-
-        public IRepository<User>? AuthenticationRepository => throw new NotImplementedException();
-
-        AuthenticationRepository IUnitOfWork.AuthenticationRepository => throw new NotImplementedException();
-
         public IEnumerable<ProductGetListResponse> GetApplicationProductList(IPagingRequest pagingRequest)
         {
-            var products = _unitOfWork.ProductRepository.GetWithPaging(pagingRequest);
+            var products = _repository.GetWithPaging(pagingRequest);
 
             var productListResponse = products.Select(p => new ProductGetListResponse
             {
