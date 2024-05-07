@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace FooDrink.BussinessService.Service
 {
-    public class ProductService : IProductRepository
+    public class ProductService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -23,7 +23,25 @@ namespace FooDrink.BussinessService.Service
 
         public IRepository<User>? AuthenticationRepository => throw new NotImplementedException();
 
-        AuthenticationRepository IUnitOfWork.AuthenticationRepository => throw new NotImplementedException();
+        public Task<Product> AddAsync(Product entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> EditAsync(Product entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Product>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<ProductGetListResponse> GetApplicationProductList(IPagingRequest pagingRequest)
         {
@@ -41,5 +59,14 @@ namespace FooDrink.BussinessService.Service
             return productListResponse;
         }
 
+        public Task<Product?> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetWithPaging(IPagingRequest pagingRequest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

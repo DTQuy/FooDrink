@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FooDrink.BussinessService.Service
 {
-    public class UserService : IUserRepository
+    public class UserService
     {
         private readonly IUnitOfWork _unitOfWork;
 

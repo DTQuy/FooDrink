@@ -47,5 +47,10 @@ namespace FooDrink.Repository
             }
             return entity;
         }
+
+        public void SaveChangeData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
